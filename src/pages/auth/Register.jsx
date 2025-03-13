@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Form from './components/form/Form'
 import { register } from '../../../store/authSlice'
 import { useDispatch,useSelector } from 'react-redux'
@@ -13,10 +13,14 @@ const Register = () => {
    dispatch(register(data))
    if(status===STATUSES.SUCCESS){
     navigate('/login')
-   }else{
-    navigate('/register')
-   }
   }
+  else{
+    navigate('/register')
+  }
+  }
+  
+   
+ 
   return (
     <Form type='register' onSubmit={handleRegister}/>
   )

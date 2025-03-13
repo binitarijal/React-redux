@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link,} from 'react-router-dom'
 
     const Form = ({type,onSubmit,user}) => {
-      
+      console.log(user)
         const [data,setData]=useState({
           username:'',
           email:'',
@@ -26,8 +26,9 @@ import { Link,} from 'react-router-dom'
     <form onSubmit={handleSubmit} className="max-w-sm mx-auto p-6 bg-blue-50 border border-blue-200 rounded-lg shadow-md dark:bg-blue-900 dark:border-blue-700 mt-36">
     <h2 className="text-xl font-semibold text-blue-700 dark:text-blue-300 text-center mb-4">
         {type==='Login' ? 'Login ' : 'Register'}
-        <p>{type==='Login' && `Hello,${user?.username}` }</p>
     </h2>
+    <p>{type==='Login' && `Hello,${user?.username}` }</p>
+
     
    {type==='register' && (
      <div className="mb-4">

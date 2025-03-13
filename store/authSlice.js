@@ -21,7 +21,7 @@ const authSlice=createSlice({
      }
 })
 
-export const { setUser, setToken,setStatus } = authSlice.actions;
+export const { setUser, setToken,setStatus } = authSlice.actions
 export default authSlice.reducer
 
 export function register(data){
@@ -29,7 +29,7 @@ export function register(data){
         dispatch(setStatus(STATUSES.LOADING))
       try{
         const response=  await axios.post('https://react30.onrender.com/api/user/register',data)
-        if(response.status===200){
+        if(response.status===201){
             dispatch(setStatus(STATUSES.SUCCESS))
             dispatch(setUser(data))
         }else{
@@ -46,7 +46,7 @@ export function login(data){
     return async function loginThunk(dispatch) {
         dispatch(setStatus(STATUSES.LOADING))
         try{
-            const login=await axios.post('https://react30.onrender.com/api/user/login',data)
+            const response=await axios.post('https://react30.onrender.com/api/user/login',data)
         if(response.status===200){
             const token=response?.data?.token
             dispatch(setStatus(STATUSES.SUCCESS))
@@ -58,7 +58,7 @@ export function login(data){
         }
     }
         catch(error){
-dispatch(setStatus(SUCCESS.ERROR))
+dispatch(setStatus(STATUSES.ERROR))
         }
         
     }
