@@ -3,21 +3,24 @@ import Form from './components/form/Form'
 import { useDispatch, useSelector } from 'react-redux'
 import STATUSES from '../../../global/status/statuses'
 import { useNavigate } from 'react-router-dom'
-import { login } from '../../../store/authSlice'
+import { login, setStatus } from '../../../store/authSlice'
 
 const Login = () => {
-  
   const {status,user}=useSelector((state)=>state.auth)
   const navigate=useNavigate()
   const dispatch=useDispatch()
   const handleLogin=(data)=>{
    dispatch(login(data))
-   if (status === STATUSES.SUCCESS) {
-    navigate('/blog/add')
-  } else {
-    navigate('/login')
-  }
   } 
+  useEffect(()=>{
+    if(status===STATUSES.SUCCESS){
+     navigate('/')
+      dispatch(setStatus(null))
+    }
+    else if (status === STATUSES.ERROR) {
+      navigate('/register')
+    }
+  }, [status, navigate, dispatch])
  
   return (
    

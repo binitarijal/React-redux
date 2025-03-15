@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link,} from 'react-router-dom'
 
     const Form = ({type,onSubmit,user}) => {
-      console.log(user)
+      
         const [data,setData]=useState({
           username:'',
           email:'',

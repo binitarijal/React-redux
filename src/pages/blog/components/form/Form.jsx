@@ -1,7 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Form = ({type}) => {
-    
+const Form = ({type,onsubmit}) => {
+	const[blog,setBlog]=useState({
+		title:"",
+		subtitle:"",
+		description:"",
+		category:"",
+		image:""
+	})
+	const handleChange=(e)=>{
+		const{name,value}=e.target
+		setBlog({
+			...blog,
+			[name]: name==='image'?e.target.files[0]:value
+		})
+	}
+   const handleSubmit=(e)=>{
+	e.preventDefault();
+	onsubmit(data)
+
+	}
   return (
     <div className="flex justify-center  w-screen h-screen">
 
@@ -31,10 +49,7 @@ const Form = ({type}) => {
           </button>
 				</div>
 			</div>
-
-
     </div>
- 
 </div>
   )
 }
