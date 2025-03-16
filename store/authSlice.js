@@ -31,7 +31,8 @@ export function register(data){
         const response=  await API.post('register',data)
         if(response.status===201){
             dispatch(setStatus(STATUSES.SUCCESS))
-            dispatch(setUser(response.data))
+            dispatch(setUser(response.data.data))
+            console.log(response.data.data)
         }else{
             dispatch(setStatus(STATUSES.ERROR))
         }
@@ -50,7 +51,7 @@ export function login(data){
         if(response.status===200 && response.data.token){
             const token=response.data.token
             dispatch(setStatus(STATUSES.SUCCESS))
-            dispatch(setUser(response.data))
+            dispatch(setUser(response.data.data))
             dispatch(setToken(token))
         }else{
             

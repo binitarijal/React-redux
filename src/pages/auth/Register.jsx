@@ -17,10 +17,7 @@ const Register = () => {
        navigate('/login')
       dispatch(setStatus(null))
     }
-    else if (status === STATUSES.ERROR) {
-      navigate('/register')
-    }
-  }, [status, navigate, dispatch])
+})
   
    
  

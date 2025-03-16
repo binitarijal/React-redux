@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import { login, setStatus } from '../../../store/authSlice'
 
 const Login = () => {
-  const {status,user}=useSelector((state)=>state.auth)
+  const {status,user,token}=useSelector((state)=>state.auth)
+  //console.log(user)
   const navigate=useNavigate()
   const dispatch=useDispatch()
   const handleLogin=(data)=>{
@@ -14,13 +15,11 @@ const Login = () => {
   } 
   useEffect(()=>{
     if(status===STATUSES.SUCCESS){
-     navigate('/')
+      localStorage.setItem('token',token)
+     navigate('/blog/add')
       dispatch(setStatus(null))
     }
-    else if (status === STATUSES.ERROR) {
-      navigate('/register')
-    }
-  }, [status, navigate, dispatch])
+})
  
   return (
    

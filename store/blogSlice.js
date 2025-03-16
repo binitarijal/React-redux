@@ -45,8 +45,9 @@ export function fetchBlog(){
         dispatch(setStatus(STATUSES.LOADING))
         try{
             const response=await API.get('blog')
-            if(response.status===200 && response.data.blog.length>0){
-                dispatch(setBlog(response.data.blog))
+            if(response.status===200 && response.data.data.length>0){
+                dispatch(setBlog(response.data.data))
+                //console.log(response.data.data)
                 dispatch(setStatus(STATUSES.SUCCESS))
             }
             else{
@@ -59,6 +60,29 @@ export function fetchBlog(){
         }
     }
 }
+
+export function fetchSingleBlog(id){
+    return async function fetchSingleBlogThunk(dispatch) {
+        dispatch(setStatus(STATUSES.LOADING))
+        try{
+            const response=await API.get(`blog/${id}`)
+            if(response.status===200 && response.data){
+                dispatch(setBlog(response.data))
+                console.log(response.data)
+                dispatch(setStatus(STATUSES.SUCCESS))
+            }
+            else{
+                dispatch(setStatus(STATUSES.ERROR))
+            }
+        }
+        
+        catch(error){
+            dispatch(setStatus(STATUSES.ERROR))
+        }
+    }
+}
+
+
 
 export function deleteBlog(id,token){
     return async function deleteBlogThunk(dispatch) {
