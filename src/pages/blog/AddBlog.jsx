@@ -16,11 +16,11 @@ const AddBlog = () => {
    dispatch(addBlog(data))
   }
   useEffect(()=>{
-    if(status===STATUSES.SUCCESS){
+    if(status===STATUSES.SUCCESS && formSubmitted){
       navigate('/')
       dispatch(setStatus(null))
     }
-})
+},[status])
   return (
   <Layout>
 	<Form type='Create' onSubmit={handleAddBlog}/>

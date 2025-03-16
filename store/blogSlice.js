@@ -67,8 +67,8 @@ export function fetchSingleBlog(id){
         try{
             const response=await API.get(`blog/${id}`)
             if(response.status===200 && response.data){
-                dispatch(setBlog(response.data))
-                console.log(response.data)
+                dispatch(setBlog(response.data.data))
+               // console.log(response.data)
                 dispatch(setStatus(STATUSES.SUCCESS))
             }
             else{
@@ -118,6 +118,8 @@ export function editBlog(id,data){
             })
         if(response.status===200){
             dispatch(setStatus(STATUSES.SUCCESS))
+            dispatch(setBlog(response.data.data))
+            console.log()
         }else{
             
         dispatch(setStatus(STATUSES.ERROR))

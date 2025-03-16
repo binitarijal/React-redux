@@ -6,12 +6,14 @@ import { fetchSingleBlog } from '../../../store/blogSlice'
 
 const SingleBlog = () => {
     const { id } = useParams()
+    console.log(id)
     const dispatch=useDispatch()
     const {data:blog,status}=useSelector((state)=>state.blog)
-    //console.log(blog)
+    console.log(blog)
+    //console.log(blog._id)
     useEffect(()=>{
       dispatch(fetchSingleBlog(id))
-    },[dispatch,id])
+    },[])
 
     const handleDelete = () => {
         dispatch(deleteBlog(id))
@@ -62,6 +64,7 @@ const SingleBlog = () => {
 
       <div className="flex space-x-4 mt-6">
       <Link to={`/blog/edit/${blog._id}`}>
+      
         <button className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition">
           Edit Blog
         </button>
