@@ -1,25 +1,28 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../../components/layout/Layout'
 import Form from './components/form/Form'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import STATUSES from '../../../global/status/statuses'
 import { editBlog, setStatus } from '../../../store/blogSlice'
 
 const EditBlog = () => {
-
-  const {status}=useSelector((state)=>state.blog)
+  const[formSubmitted,setFormSubmitted]=useState(false)
+const {id}= useParams()
+//console.log(id)
+  const {status,blog}=useSelector((state)=>state.blog)
   const navigate=useNavigate()
   const dispatch=useDispatch()
   const handleEditBlog=(data)=>{
-   dispatch(editBlog(data))
+   dispatch(editBlog(id,data))
+   setFormSubmitted('true')
   }
   useEffect(()=>{
     if(status===STATUSES.SUCCESS && formSubmitted){
       navigate('/')
       dispatch(setStatus(null))
     }
-})
+},[status,formSubmitted])
 
 
   return (

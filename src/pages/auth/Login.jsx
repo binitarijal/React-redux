@@ -19,7 +19,7 @@ const Login = () => {
      navigate('/blog/add')
       dispatch(setStatus(null))
     }
-})
+},[status])
  
   return (
    

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/navbar/Navbar'
 import Layout from '../../components/layout/Layout'
 import Form from './components/form/Form'
@@ -9,11 +9,13 @@ import { addBlog } from '../../../store/blogSlice'
 import { setStatus } from '../../../store/blogSlice'
 
 const AddBlog = () => {
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const {status}=useSelector((state)=>state.blog)
   const navigate=useNavigate()
   const dispatch=useDispatch()
   const handleAddBlog=(data)=>{
    dispatch(addBlog(data))
+   setFormSubmitted('true')
   }
   useEffect(()=>{
     if(status===STATUSES.SUCCESS && formSubmitted){

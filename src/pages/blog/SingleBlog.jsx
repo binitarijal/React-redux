@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react'
 import Layout from '../../components/layout/Layout'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchSingleBlog } from '../../../store/blogSlice'
+import { deleteBlog, fetchSingleBlog } from '../../../store/blogSlice'
 
 const SingleBlog = () => {
     const { id } = useParams()
-    console.log(id)
+    const navigate=useNavigate()
+   // console.log(id)
     const dispatch=useDispatch()
     const {data:blog,status}=useSelector((state)=>state.blog)
-    console.log(blog)
+    //console.log(blog)
     //console.log(blog._id)
     useEffect(()=>{
       dispatch(fetchSingleBlog(id))
@@ -17,6 +18,7 @@ const SingleBlog = () => {
 
     const handleDelete = () => {
         dispatch(deleteBlog(id))
+        navigate('/')
       }
   return (
 
@@ -63,8 +65,7 @@ const SingleBlog = () => {
       </div>
 
       <div className="flex space-x-4 mt-6">
-      <Link to={`/blog/edit/${blog._id}`}>
-      
+      <Link to={`/blog/edit/${id}`}>  
         <button className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition">
           Edit Blog
         </button>

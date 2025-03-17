@@ -84,15 +84,11 @@ export function fetchSingleBlog(id){
 
 
 
-export function deleteBlog(id,token){
+export function deleteBlog(id){
     return async function deleteBlogThunk(dispatch) {
         dispatch(setStatus(STATUSES.LOADING));
         try{
-const response=await API.delete(`blog/${id}`,{
-    headers:{
-        token:token
-    }
-})
+const response=await API.delete(`blog/${id}`)
 if(response.status===200){
     dispatch(setStatus(STATUSES.SUCCESS))
 }
@@ -111,11 +107,7 @@ export function editBlog(id,data){
     return async function editBlogThunk(dispatch) {
         dispatch(setStatus(STATUSES.LOADING))
         try{
-            const response=await API.patch(`blog/${id}`,data,{
-                headers:{
-                    "Content-Type":"multipart/form-data",
-                }
-            })
+            const response=await API.patch(`blog/${id}`,data)
         if(response.status===200){
             dispatch(setStatus(STATUSES.SUCCESS))
             dispatch(setBlog(response.data.data))

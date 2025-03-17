@@ -17,7 +17,7 @@ const Register = () => {
        navigate('/login')
       dispatch(setStatus(null))
     }
-})
+},[status])
   
    
  
